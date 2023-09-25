@@ -4,15 +4,24 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import {provideClientHydration} from '@angular/platform-browser';
+
+import { HeaderComponent } from './header/header.component';
+import { RightsidebarComponent } from './rightsidebar/rightsidebar.component';
+import { LeftsidebarComponent } from './leftsidebar/leftsidebar.component';
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HeaderComponent,
+    RightsidebarComponent,
+    LeftsidebarComponent
   ],
-  providers: [],
+  providers: [ provideClientHydration() ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

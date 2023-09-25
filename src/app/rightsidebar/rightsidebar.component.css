@@ -1,0 +1,13 @@
+.bound-box{
+    /* border: dotted; */
+    /* border-color: red; */
+    min-height: 800px;
+    min-width: 600px;
+    /* max-height: 200px;
+    max-width: 200px; */
+  } 
+  
+  .resizable-widget{
+    opacity: 1;
+    border: none;
+  }
