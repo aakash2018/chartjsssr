@@ -1,14 +1,13 @@
-<div class="mx-0 position-relative">
+<div class="mx-0 ">
 	<p>Report Builder</p>
-	<!-- <ng-container *ngIf="chartData?.length > 0"> -->
-		<div *ngFor="let items of [1,2,3,4,6];let i = index">
+	<ng-container *ngIf="chartData?.length > 0">
+		<div *ngFor="let items of chartData;let i = index">
 			<p>
-				+ Line Charts
-				<!-- + {{items.type}} -->
+				+ {{items.type}}
 			</p>
 		</div>
-	<!-- </ng-container> -->
-	<div class="d-flex gap-2 position-absolute fixed-bottom mx-1">
+	</ng-container>
+	<div class="d-flex gap-2 fixed-bottom mx-1 position-relative">
 		<select class="form-select form-select-sm h-50 mx-0 w-50" aria-label="Default select example">
 			<option selected value="pdf">Pdf</option>
 			<option value="csv">Csv</option>
@@ -16,7 +15,32 @@
 			<option value="png">Png</option>
 			<option value="xls">Xls</option>
 		</select>
-		<button type="button" class="btn btn-primary btn-sm w-auto p-1 h-50">Build
+		<button type="button" class="btn btn-primary btn-sm w-auto p-1 h-50"  (click)="openChartModal()">Build
 			Report</button>
+	</div>
+</div>
+
+<!-- highcharts.component.html -->
+<div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-title">Preview Pdf</h4>
+			</div>
+			<div class="modal-body bound-box" id="htmlData" #myBounds >
+				<ng-container *ngFor="let item of chartData;let i =index">
+					<div class="resizable-widget"   ngResizable  [rzAspectRatio]="aspectRatio" ngDraggable [inBounds]="inBounds" [bounds]="myBounds" rzContainment="parent" rzHandles="all"
+						(mouseup)="newPosition($event)" (rzStop)="onResizeStop($event,item.type)"  (endOffset)="onMoveEnd($event,item.type)" Resizable>
+							<canvas [id]="'chart-container-'+i"></canvas>
+					</div>
+				</ng-container>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-danger btn-sm" (click)="closePopup()">
+					Close
+				</button>
+				<button type="button" class="btn btn-sm btn-primary" (click)="openPDF()">Create Pdf</button>
+			</div>
+		</div>
 	</div>
 </div>

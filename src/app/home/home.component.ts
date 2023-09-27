@@ -17,25 +17,25 @@ export class HomeComponent implements OnInit {
 		labels: ['Start', 'Income', 'Expense 1', 'Expense 2', 'End'],
 		datasets: [
 			{
-        label: 'Data 1 (Left)',
+				label: 'Data 1 (Left)',
 				type: 'bar',
-        data: [10, -20, 10, 40, 50],
-        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-        borderColor: 'rgba(75, 192, 192, 1)',
-        borderWidth: 2,
-        // yAxisID: 'left-y-axis' 
+				data: [10, -20, 10, 40, 50],
+				backgroundColor: 'rgba(75, 192, 192, 0.2)',
+				borderColor: 'rgba(75, 192, 192, 1)',
+				borderWidth: 2,
+				// yAxisID: 'left-y-axis' 
 				// Assign to the left Y-axis
-      }, 
+			},
 			{
-        label: 'Data 2 (Right)',
+				label: 'Data 2 (Right)',
 				type: 'line',
-        data: [10, 20, -25, 15, 50],
-        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-        borderColor: 'rgba(255, 99, 132, 1)',
-        borderWidth: 2,
-        // yAxisID: 'right-y-axis' 
+				data: [10, 20, -25, 15, 50],
+				backgroundColor: 'rgba(255, 99, 132, 0.2)',
+				borderColor: 'rgba(255, 99, 132, 1)',
+				borderWidth: 2,
+				// yAxisID: 'right-y-axis' 
 				// Assign to the right Y-axis
-      }
+			}
 		]
 	};
 
@@ -89,7 +89,7 @@ export class HomeComponent implements OnInit {
 	ngOnInit(): void {
 		new Chart('mychart',
 			{
-		
+
 				data: this.data,
 				options: this.options
 			}

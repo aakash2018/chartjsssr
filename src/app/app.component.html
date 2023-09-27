@@ -2,13 +2,13 @@
 <div class="container-fluid mx-0 g-0">
 	<div class="row mx-0">
     <div class="col-2 min-vh-100 bg-danger-subtle position-relative">
-      <app-leftsidebar></app-leftsidebar>
+      <app-leftsidebar  (onSubmitChange)="onSubmit($event)"></app-leftsidebar>
     </div>
 		<div class="col-8 gx-1">
 			<router-outlet></router-outlet>
 		</div>
 		<div class="col-2 min-vh-100 bg-danger-subtle ">
-			<app-rightsidebar></app-rightsidebar>
+			<app-rightsidebar [chartData]="chartData"></app-rightsidebar>
 		</div>
 
 	</div>
