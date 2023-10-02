@@ -53,7 +53,7 @@ export class RightsidebarComponent implements OnInit {
       if (res) {
         res.forEach((element: any, index: number): void => {
           this.mychart.data = res[index].data;
-          this.mychart.optins = res[index].optins;
+          this.mychart.options = res[index].options;
           this.mychart.update();
         }
         )
