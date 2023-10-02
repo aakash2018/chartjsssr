@@ -2,7 +2,7 @@
 	<p>Report Builder</p>
 	<ng-container *ngIf="chartData?.length > 0">
 		<div *ngFor="let items of chartData;let i = index">
-			<p>
+			<p  class="cursor-pointer" (click)="reUseable(items,i)">
 				+ {{items.type}}
 			</p>
 		</div>

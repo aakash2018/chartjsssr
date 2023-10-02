@@ -1,131 +1,66 @@
-import { Component, ElementRef, Input, OnInit, QueryList, ViewChildren } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { AngularDraggableModule } from 'angular2-draggable';
 import { Chart, registerables } from 'chart.js';
+import { AppserviceService } from '../appservice.service';
 Chart.register(...registerables);
 @Component({
   selector: 'app-rightsidebar',
   standalone: true,
-  imports: [CommonModule,AngularDraggableModule],
+  imports: [CommonModule, AngularDraggableModule],
   templateUrl: './rightsidebar.component.html',
   styleUrls: ['./rightsidebar.component.css']
 })
 export class RightsidebarComponent implements OnInit {
   @Input() chartData: any;
+  @Input() updateData: any;
   @ViewChildren('myBounds') boundElements!: QueryList<ElementRef>;
+  @Output() onReusableChange = new EventEmitter();
   userData: any;
-  aspectRatio:any;
+  aspectRatio: any;
   displayStyle = "none";
   inBounds = true;
   position: any;
   positionData: any[] = [];
   resizePositionData: any[] = [];
   chartOptions!: any;
-
   ctx: any;
   canvas: any;
-  data: any = {
-    labels: ['Start', 'Income', 'Expense 1', 'Expense 2', 'End'],
-    datasets: [
-      {
-        label: 'Data 1 (Left)',
-        type: 'bar',
-        data: [10, -20, 10, 40, 50],
-        backgroundColor: 'rgba(75, 192, 192, 0.2)',
-        borderColor: 'rgba(75, 192, 192, 1)',
-        borderWidth: 2,
-        // yAxisID: 'left-y-axis' 
-        // Assign to the left Y-axis
-      },
-      {
-        label: 'Data 2 (Right)',
-        type: 'line',
-        data: [10, 20, -25, 15, 50],
-        backgroundColor: 'rgba(255, 99, 132, 0.2)',
-        borderColor: 'rgba(255, 99, 132, 1)',
-        borderWidth: 2,
-        // yAxisID: 'right-y-axis' 
-        // Assign to the right Y-axis
-      }
-    ]
-  };
-
-  options: any = {
-    scales: {
-      y: {
-        display: false, // Hide the default Y-axis scale
-        beginAtZero: true,
-      },
-      leftYAxis: {
-        id: 'left-y-axis',
-        type: 'linear',
-        position: 'left', // Position the left Y-axis on the left side
-        // ticks: {
-        // 	beginAtZero: true,
-        // 	callback: function (value:any, index:any, values:any) {
-        // 		// Customize labels for the left Y-axis
-        // 		return value + ' units (left)';
-        // 	}
-        // }
-      },
-      rightYAxis: {
-        id: 'right-y-axis',
-        type: 'linear',
-        position: 'right', // Position the right Y-axis on the right side
-        // ticks: {
-        // 	beginAtZero: true,
-        // 	callback: function (value:any, index:any, values:any) {
-        // 		// Customize labels for the right Y-axis
-        // 		return value + ' units (right)';
-        // 	}
-        // }
-      }
-
-    },
-    plugins: {
-      legend: {
-        display: true
-      },
-      title: {
-        display: true,
-        text: 'Waterfall Chart Example'
-      }
-    }
-  };
-
-  constructor(private elementRef: ElementRef) {
+  data: any;
+  mychart: any;
+  constructor(private elementRef: ElementRef, private appService: AppserviceService) {
 
   }
 
   ngOnInit(): void {
-    console.log(this.chartData,"103 line check");
     this.userData = this.chartData;
   }
 
   openChartModal() {
     this.displayStyle = "block";
-    this.chartData.forEach((element: any, index: number): void => {
-      //   console.log(index);
-      new Chart(`chart-container-${index}`,
-        {
 
-          data: this.data,
-          options: this.options
+    this.chartData.forEach((element: any, index: number): void => {
+      this.mychart = new Chart(`chart-container-${index}`,
+        {
+          data: element.data,
+          options: element.options
         }
       )
-      //   if (element.type !== 'Table') {
-      //     this.chartOptions = this.userData[element.type];
-      //     const containerId = `chart-container-${index}`;
-      //     const container = this.elementRef.nativeElement.querySelector(`#${containerId}`);
-      //     // Highcharts.chart(container, this.chartOptions);
-      //   } else {
-      //     this.tableOptions = this.userData[element.type];
-      //     console.log(this.tableOptions);
-      //     this.tableData = this.tableOptions[element.tableData];
-      //   }
-    })
+    });
+    this.appService.updateChartData$.subscribe((res: any) => {
+      if (res) {
+        res.forEach((element: any, index: number): void => {
+          this.mychart.data = res[index].data;
+          this.mychart.optins = res[index].optins;
+          this.mychart.update();
+        }
+        )
+      }
+
+    });
+
   }
 
   closePopup() {
@@ -147,7 +82,6 @@ export class RightsidebarComponent implements OnInit {
   }
 
   onMoveEnd(event: any, keys: any) {
-    console.log(event);
     const data = {
       [keys]: {
         position: event
@@ -198,6 +132,11 @@ export class RightsidebarComponent implements OnInit {
     const x = element.offsetLeft;
     const y = element.offsetTop;
     this.position = "(" + x + ", " + y + ")";
+  }
+
+  reUseable(value: any, index: any): void {
+    localStorage.setItem('chartIndex', index);
+    this.onReusableChange.emit(value);
   }
 
 }

@@ -1,6 +1,8 @@
 import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Chart, registerables } from 'chart.js';
+import { AppserviceService } from '../appservice.service';
+import * as chartData from './../../assets/chart.json';
 Chart.register(...registerables);
 
 @Component({
@@ -10,89 +12,80 @@ Chart.register(...registerables);
 	templateUrl: './home.component.html',
 	styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
 	ctx: any;
 	canvas: any;
-	data: any = {
-		labels: ['Start', 'Income', 'Expense 1', 'Expense 2', 'End'],
-		datasets: [
-			{
-				label: 'Data 1 (Left)',
-				type: 'bar',
-				data: [10, -20, 10, 40, 50],
-				backgroundColor: 'rgba(75, 192, 192, 0.2)',
-				borderColor: 'rgba(75, 192, 192, 1)',
-				borderWidth: 2,
-				// yAxisID: 'left-y-axis' 
-				// Assign to the left Y-axis
-			},
-			{
-				label: 'Data 2 (Right)',
-				type: 'line',
-				data: [10, 20, -25, 15, 50],
-				backgroundColor: 'rgba(255, 99, 132, 0.2)',
-				borderColor: 'rgba(255, 99, 132, 1)',
-				borderWidth: 2,
-				// yAxisID: 'right-y-axis' 
-				// Assign to the right Y-axis
-			}
-		]
-	};
-
-	options: any = {
-		scales: {
-			y: {
-				display: false, // Hide the default Y-axis scale
-				beginAtZero: true,
-			},
-			leftYAxis: {
-				id: 'left-y-axis',
-				type: 'linear',
-				position: 'left', // Position the left Y-axis on the left side
-				// ticks: {
-				// 	beginAtZero: true,
-				// 	callback: function (value:any, index:any, values:any) {
-				// 		// Customize labels for the left Y-axis
-				// 		return value + ' units (left)';
-				// 	}
-				// }
-			},
-			rightYAxis: {
-				id: 'right-y-axis',
-				type: 'linear',
-				position: 'right', // Position the right Y-axis on the right side
-				// ticks: {
-				// 	beginAtZero: true,
-				// 	callback: function (value:any, index:any, values:any) {
-				// 		// Customize labels for the right Y-axis
-				// 		return value + ' units (right)';
-				// 	}
-				// }
-			}
-
-		},
-		plugins: {
-			legend: {
-				display: true
-			},
-			title: {
-				display: true,
-				text: 'Waterfall Chart Example'
-			}
-		}
-	};
-
-	constructor() {
-
+	data: any;
+	options: any;
+	chartdata: any = chartData;
+	mychart: any;
+	updateValue: any;
+	constructor(private appService: AppserviceService) {
+		this.data = this.chartdata['CombineChart']?.data;
+		this.options = this.chartdata['CombineChart']?.options;
 	}
 
 	ngOnInit(): void {
-		new Chart('mychart',
-			{
 
-				data: this.data,
-				options: this.options
+		this.appService.selectedChartData$.subscribe((res: any) => {
+			if (Array.isArray(res)) {
+				this.updateChart(res);
+			} else {
+				this.updateDataValue(res);
+			}
+		});
+
+		this.appService.updateChartData$.subscribe((res: any) => {
+			console.log(res);
+			this.chartdata = res;
+			this.updateChartData(res);
+		});
+
+
+	}
+
+	ngAfterViewInit(): void {
+		this.mychart = new Chart('mychart',
+			{
+				data: this?.data,
+				options: this?.options
 			}
 		)
 	}
+
+	updateChart(updateValue: any): void {
+		this.mychart.data = updateValue[updateValue.length - 1]?.data; // Update chart data
+		this.mychart.options = updateValue[updateValue.length - 1]?.options; // Update chart options
+		// Check if the chart is already initialized, then update it
+		if (this.mychart) {
+			this.mychart.update();
+		}
+	}
+
+	updateDataValue(updateValue: any): void {
+		console.log(updateValue, "62 line home ");
+
+		this.mychart.data = updateValue?.data;
+		this.mychart.options = updateValue?.options;
+
+		if (this.mychart) {
+			this.mychart.update();
+		}
+	}
+
+	updateChartData(updateValue: any): void {
+		console.log(updateValue, "62 line home ");
+
+		const index:any =localStorage.getItem('chartIndex');
+	
+		this.mychart.data = updateValue[index]?.data;
+		this.mychart.options = updateValue[index]?.options;
+
+		if (this.mychart) {
+			this.mychart.update();
+		}
+	
+	}
+
+
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as userData from './../assets/chart.json';
+import { AppserviceService } from './appservice.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -8,20 +9,39 @@ import * as userData from './../assets/chart.json';
 export class AppComponent implements OnInit {
   title = 'csvchartjs';
   chartData: any[] = [];
+  updateData: any[] = [];
   userData: any;
+  constructor(private appService: AppserviceService) {
+
+  }
   ngOnInit(): void {
     this.userData = userData;
   }
-  onSubmit(event: any) {
-    console.log(event, "app module  17 line");
 
+  onSubmit(event: any) {
     const data: any = {
-      name:event.name,
-      type:event.type,
-      title:event.title,
-      xaxis:event.xaxis,
-      data: this.userData[event.type].data.datasets
+      type: event.type,
+      data: event.data,
+      options: event.options
     }
-    this.chartData.push(data);
+    this.chartData = event;
+    this.appService.setChartData(event);
+  }
+
+  onUpdate(event: any) {
+    console.log(event, "fdf");
+    this.appService.setUpdateChart(event);
+    // this.appService.setChartData(event);
+
+  }
+
+  reUseable(event: any) {
+    const data: any = {
+      type: event.type,
+      data: event.data,
+      options: event.options
+    }
+  
+    this.appService.setChartData(event);
   }
 }

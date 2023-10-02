@@ -3,17 +3,17 @@
 		<div>
 			<label for="chartname">Chart Name</label>
 			<input class="form-control form-control-sm h-50" formControlName="name" type="text" name="name"
-				id="chartname" />
+				id="chartname" [readonly]="!isObjectEmpty(responseData)"/>
 		</div>
 		<div>
 			<label for="charttype">Chart Type</label>
 			<select class="form-select form-select-sm h-50" name="type" 
 				formControlName="type" aria-label="Default select example">
 				<option value="CombineChart" selected>Combine Chart</option>
+				<option value="lineChart">Line Chart</option>
 				<option value="barChart">Bar Chart</option>
-				<option value="AreaChart">Area Chart</option>
-				<option value="WaterfallChart">Waterfall Chart</option>
-				<option value="Table">Table</option>
+				<!-- <option value="WaterfallChart">Waterfall Chart</option>
+				<option value="Table">Table</option> -->
 			</select>
 		</div>
 		<div>
@@ -30,8 +30,11 @@
 			<input class="form-control form-control-sm h-50" formControlName="title" type="text" name="chartname"
 				id="chartname" />
 		</div>
-		<div class="">
+		<div class="" *ngIf="isObjectEmpty(responseData)">
 			<button type="submit" class="btn btn-primary btn-sm mt-2">Build Chart</button>
+		</div>
+		<div class="" *ngIf="!isObjectEmpty(responseData)">
+			<button type="button" class="btn btn-primary btn-sm mt-2" (click)="onUpdate()">Update Chart</button>
 		</div>
 	</form>
 </div>
