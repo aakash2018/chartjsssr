@@ -35,6 +35,7 @@ export class RightsidebarComponent implements OnInit {
   }
 
   ngOnInit(): void {
+   
     this.userData = this.chartData;
   }
 
@@ -58,9 +59,7 @@ export class RightsidebarComponent implements OnInit {
         }
         )
       }
-
     });
-
   }
 
   closePopup() {
@@ -78,7 +77,6 @@ export class RightsidebarComponent implements OnInit {
       PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
       PDF.save('angular-demo.pdf');
     });
-
   }
 
   onMoveEnd(event: any, keys: any) {
@@ -87,7 +85,6 @@ export class RightsidebarComponent implements OnInit {
         position: event
       }
     };
-
     if (this.positionData?.length > 1) {
       this.positionData.forEach((items, index) => {
         for (const key in items) {
@@ -101,7 +98,6 @@ export class RightsidebarComponent implements OnInit {
     } else {
       this.positionData.push(data);
     }
-
   }
 
   onResizeStop(event: any, keys: any) {
@@ -125,7 +121,6 @@ export class RightsidebarComponent implements OnInit {
   }
 
   newPosition(event: any) {
-    console.log(event, "131")
     const boundingRect = event.currentTarget.getBoundingClientRect();
     const element = event.currentTarget;
     // const x = event.pageX - boundingRect.left;

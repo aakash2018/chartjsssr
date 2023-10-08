@@ -21,6 +21,7 @@ export class LeftsidebarComponent implements AfterViewInit {
     labels: [''],
     datasets: [],
   }
+  toggleView = false;
   responseData: any;
 
   xaxisLabels: any = {
@@ -28,6 +29,12 @@ export class LeftsidebarComponent implements AfterViewInit {
     months: ['Jan', 'Feb', 'Mar', 'Apr', 'May'],
     date: ['17/8/2023', '18/8/2023', '19/8/2023', '20/8/2023', '21/8/2023'],
     default: ["Start", "Income", "Expense 1", "Expense 2", "End"],
+    table: [[
+      "Id",
+      "Name",
+      "Email",
+      "Phone"
+    ]]
   };
 
 
@@ -41,6 +48,8 @@ export class LeftsidebarComponent implements AfterViewInit {
       title: new FormControl('', [
         Validators.required,]),
       xaxis: new FormControl('Years', [
+        Validators.required,]),
+      description: new FormControl('', [
         Validators.required,]),
       // tableData: new FormControl('', [
       //   Validators.required,]),
@@ -58,6 +67,7 @@ export class LeftsidebarComponent implements AfterViewInit {
           type: res?.type,
           title: res?.options?.plugins?.title?.text,
           xaxis: res?.xaxis,
+          description: res?.options?.plugins?.subtitle?.text
         });
       } else {
         this.onUpdate();
@@ -70,9 +80,17 @@ export class LeftsidebarComponent implements AfterViewInit {
   }
 
   onSubmit(): void {
+    this.chartOnSubmit();
+  }
+
+  chartOnSubmit(): void {
     const selectedXaxis = this.reactiveForm.value.xaxis;
 
-    this.dynamicChart.labels = this.xaxisLabels[this.reactiveForm?.value?.xaxis] || this.xaxisLabels.default;
+    if (this.reactiveForm?.value?.type === 'Table') {
+      this.dynamicChart.labels = this.xaxisLabels.table
+    } else {
+      this.dynamicChart.labels = this.xaxisLabels[this.reactiveForm?.value?.xaxis] || this.xaxisLabels.default;
+    }
     this.dynamicChart.datasets = this.chartjsData[this.reactiveForm?.value?.type]?.data?.datasets;
 
     this.chartjsData[this.reactiveForm.value.type].options = {
@@ -99,6 +117,10 @@ export class LeftsidebarComponent implements AfterViewInit {
         title: {
           display: true,
           text: this.reactiveForm.value.title
+        },
+        subtitle: {
+          display: true,
+          text: this.reactiveForm.value.description
         }
       }
     }
@@ -111,7 +133,7 @@ export class LeftsidebarComponent implements AfterViewInit {
       options: this.chartjsData[this.reactiveForm?.value?.type].options
     };
 
- 
+
 
     this.chartData.push(JSON.parse(JSON.stringify(chartDataset)));
     this.onSubmitChange.emit(this.chartData);
@@ -120,20 +142,30 @@ export class LeftsidebarComponent implements AfterViewInit {
 
   onUpdate(): void {
     const index: number = this.chartData.findIndex((element: any) => element.name === this.reactiveForm?.value?.name);
-   
+
     this.chartData[index].options.plugins.title.text = this.reactiveForm.value.title;
+    this.chartData[index].options.plugins.subtitle.text = this.reactiveForm.value.description;
     this.chartData[index].options = this.chartjsData[this.reactiveForm.value.type].options;
     this.chartData[index].data.labels = this.xaxisLabels[this.reactiveForm?.value?.xaxis] || this.xaxisLabels.default;
     this.chartData[index].data.datasets = this.chartjsData[this.reactiveForm.value.type].data.datasets;
     this.chartData[index].name = this.reactiveForm.value.name;
     this.chartData[index].type = this.reactiveForm.value.type;
     this.chartData[index].xaxis = this.reactiveForm.value.xaxis;
-    
+
 
     this.onUpdateChange.emit(this.chartData);
-    
+
     this.reactiveForm.reset();
 
+  }
+
+  onDropdownChange(event: any): void {
+    console.log(event.target.value, "Fdds");
+    if (event.target.value === 'Table') {
+      this.toggleView = true;
+    } else {
+      this.toggleView = false;
+    }
   }
 
 }

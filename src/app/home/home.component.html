@@ -1,3 +1,20 @@
-<div class="chart-container" style="position: relative; height:70vh; width:65vw">
+
+
+<div class="chart-container" style="position: relative; height:70vh; width:65vw" *ngIf="chartdata[0]?.type!=='Table'">
     <canvas id="mychart"  #mychart></canvas>
+</div>
+<div class="chart-container" style="position: relative; height:70vh; width:65vw" *ngIf="chartdata[0]?.type==='Table'">
+    <div class="col-8 gx-1">
+        <table class="table table-bordered" style="min-height: 200px;color:#556;">
+          <tr class="table-primary">
+            <th *ngFor="let item of chartdata[0]?.data?.labels">{{item}}</th>
+          </tr>
+          <tr *ngFor="let user of chartdata[0]?.data?.datasets[0]?.data">
+						<th>{{user?.id}}</th>
+						<td>{{user?.name}}</td>
+						<td>{{user?.email}}</td>
+						<td>{{user?.phone}}</td>
+					</tr>
+        </table>
+      </div>
 </div>

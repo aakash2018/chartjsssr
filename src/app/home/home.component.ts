@@ -74,7 +74,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 	}
 
 	updateChartData(updateValue: any): void {
-		console.log(updateValue, "62 line home ");
+		console.log(updateValue, "77 line home ");
 
 		const index:any =localStorage.getItem('chartIndex');
 	
