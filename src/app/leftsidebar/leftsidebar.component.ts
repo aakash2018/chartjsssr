@@ -87,40 +87,40 @@ export class LeftsidebarComponent implements AfterViewInit {
     const selectedXaxis = this.reactiveForm.value.xaxis;
 
     if (this.reactiveForm?.value?.type === 'Table') {
-      this.dynamicChart.labels = this.xaxisLabels.table
+      this.dynamicChart.labels = this.xaxisLabels.table;
     } else {
-      this.dynamicChart.labels = this.xaxisLabels[this.reactiveForm?.value?.xaxis] || this.xaxisLabels.default;
-    }
-    this.dynamicChart.datasets = this.chartjsData[this.reactiveForm?.value?.type]?.data?.datasets;
+      this.dynamicChart.labels = this.xaxisLabels[this.reactiveForm?.value?.xaxis] || this.xaxisLabels?.default;
+      this.dynamicChart.datasets = this.chartjsData[this.reactiveForm?.value?.type]?.data?.datasets;
 
-    this.chartjsData[this.reactiveForm.value.type].options = {
-      scales: {
-        y: {
-          display: false,
-          beginAtZero: true
+      this.chartjsData[this.reactiveForm.value.type].options = {
+        scales: {
+          y: {
+            display: false,
+            beginAtZero: true
+          },
+          leftYAxis: {
+            id: "left-y-axis",
+            type: "linear",
+            position: "left",
+          },
+          rightYAxis: {
+            id: "right-y-axis",
+            type: "linear",
+            position: "right"
+          }
         },
-        leftYAxis: {
-          id: "left-y-axis",
-          type: "linear",
-          position: "left",
-        },
-        rightYAxis: {
-          id: "right-y-axis",
-          type: "linear",
-          position: "right"
-        }
-      },
-      plugins: {
-        legend: {
-          "display": true
-        },
-        title: {
-          display: true,
-          text: this.reactiveForm.value.title
-        },
-        subtitle: {
-          display: true,
-          text: this.reactiveForm.value.description
+        plugins: {
+          legend: {
+            "display": true
+          },
+          title: {
+            display: true,
+            text: this.reactiveForm.value.title
+          },
+          subtitle: {
+            display: true,
+            text: this.reactiveForm.value.description
+          }
         }
       }
     }
@@ -130,10 +130,8 @@ export class LeftsidebarComponent implements AfterViewInit {
       type: this.reactiveForm?.value?.type,
       xaxis: this.reactiveForm?.value?.xaxis,
       data: this.dynamicChart,
-      options: this.chartjsData[this.reactiveForm?.value?.type].options
+      options: this.chartjsData[this.reactiveForm?.value?.type]?.options
     };
-
-
 
     this.chartData.push(JSON.parse(JSON.stringify(chartDataset)));
     this.onSubmitChange.emit(this.chartData);
@@ -143,29 +141,28 @@ export class LeftsidebarComponent implements AfterViewInit {
   onUpdate(): void {
     const index: number = this.chartData.findIndex((element: any) => element.name === this.reactiveForm?.value?.name);
 
-    this.chartData[index].options.plugins.title.text = this.reactiveForm.value.title;
-    this.chartData[index].options.plugins.subtitle.text = this.reactiveForm.value.description;
-    this.chartData[index].options = this.chartjsData[this.reactiveForm.value.type].options;
+    if (this.chartData[index].options) {
+      this.chartData[index].options.plugins.title.text = this.reactiveForm?.value.title;
+      this.chartData[index].options.plugins.subtitle.text = this.reactiveForm?.value.description;
+      this.chartData[index].options = this.chartjsData[this.reactiveForm?.value.type].options;
+    }
     this.chartData[index].data.labels = this.xaxisLabels[this.reactiveForm?.value?.xaxis] || this.xaxisLabels.default;
-    this.chartData[index].data.datasets = this.chartjsData[this.reactiveForm.value.type].data.datasets;
-    this.chartData[index].name = this.reactiveForm.value.name;
-    this.chartData[index].type = this.reactiveForm.value.type;
-    this.chartData[index].xaxis = this.reactiveForm.value.xaxis;
-
+    this.chartData[index].data.datasets = this.chartjsData[this.reactiveForm?.value.type].data.datasets;
+    this.chartData[index].name = this.reactiveForm?.value.name;
+    this.chartData[index].type = this.reactiveForm?.value.type;
+    this.chartData[index].xaxis = this.reactiveForm?.value.xaxis;
 
     this.onUpdateChange.emit(this.chartData);
 
     this.reactiveForm.reset();
-
   }
 
   onDropdownChange(event: any): void {
-    console.log(event.target.value, "Fdds");
-    if (event.target.value === 'Table') {
-      this.toggleView = true;
-    } else {
-      this.toggleView = false;
-    }
+    // if (event.target.value === 'Table') {
+    //   this.toggleView = true;
+    // } else {
+    //   this.toggleView = false;
+    // }
   }
 
 }
