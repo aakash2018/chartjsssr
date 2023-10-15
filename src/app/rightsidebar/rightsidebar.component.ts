@@ -1,4 +1,4 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, QueryList, ViewChildren, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
@@ -30,12 +30,11 @@ export class RightsidebarComponent implements OnInit {
   canvas: any;
   data: any;
   mychart: any;
-  constructor(private elementRef: ElementRef, private appService: AppserviceService) {
+
+  constructor(private appService: AppserviceService) {
 
   }
-
   ngOnInit(): void {
-   
     this.userData = this.chartData;
   }
 
@@ -49,16 +48,6 @@ export class RightsidebarComponent implements OnInit {
           options: element.options
         }
       )
-    });
-    this.appService.updateChartData$.subscribe((res: any) => {
-      if (res) {
-        res.forEach((element: any, index: number): void => {
-          this.mychart.data = res[index].data;
-          this.mychart.options = res[index].options;
-          this.mychart.update();
-        }
-        )
-      }
     });
   }
 
@@ -131,7 +120,8 @@ export class RightsidebarComponent implements OnInit {
 
   reUseable(value: any, index: any): void {
     localStorage.setItem('chartIndex', index);
+    this.appService.changeTableViewStatus(value.type === 'Table' ? true : false);
     this.onReusableChange.emit(value);
   }
 
-}
+}3

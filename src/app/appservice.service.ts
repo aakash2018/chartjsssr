@@ -1,35 +1,29 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Injectable, signal } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppserviceService {
-  
-  private chartDataValue$ = new BehaviorSubject<any>({});
+  chartDataArr = signal({})
+  chartDataValue = signal({})
 
-  private updateChartValues$  =new BehaviorSubject<any>({});
-
-  selectedChartData$ = this.chartDataValue$.asObservable();
-
-  updateChartData$ = this.updateChartValues$.asObservable();
-
-  constructor() { }
+  previewTable = signal(false)
 
   setChartData(data: any) {
-    console.log(data);
-    this.chartDataValue$.next(data);
+    console.log(data, 'service');
+    this.chartDataArr.set(data);
   }
 
-  getChartData(){
-    return this.selectedChartData$;
+  setCharValue(value: any) {
+    this.chartDataValue.set(value);
   }
 
-  setUpdateChart(data:any){
-    this.updateChartValues$.next(data);
+  setUpdateChart(data: any) {
+    this.chartDataArr.update(item => item = data);
+    console.log(this.chartDataArr(), 'updateService');
   }
 
-  getUpdateChart() {
-    return this.updateChartData$;
+  changeTableViewStatus(status: boolean) {
+    this.previewTable.set(status)
   }
 }

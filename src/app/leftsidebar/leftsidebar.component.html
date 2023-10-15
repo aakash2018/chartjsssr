@@ -3,37 +3,72 @@
 		<div>
 			<label for="chartname">Chart Name</label>
 			<input class="form-control form-control-sm h-50" formControlName="name" type="text" name="name"
-				id="chartname" [readonly]="!isObjectEmpty(responseData)"/>
+				id="chartname" [readonly]="!isObjectEmpty(responseData)" />
 		</div>
 		<div>
 			<label for="charttype">Chart Type</label>
-			<select class="form-select form-select-sm h-50" name="type" 
-				formControlName="type" aria-label="Default select example" (change)="onDropdownChange($event)">
+			<select class="form-select form-select-sm h-50" name="type" formControlName="type"
+				aria-label="Default select example">
 				<option value="CombineChart" selected>Combine Chart</option>
 				<option value="lineChart">Line Chart</option>
 				<option value="barChart">Bar Chart</option>
-				<option value="Table">Table</option> 
-				<!-- <option value="WaterfallChart">Waterfall Chart</option> -->
+				<option value="Table">Table</option>
+				<option value="pieChart">Pie Chart</option>
+				<option value="areaChart">Area Chart</option>
+				<option value="scatterPlotChart">Scatter Area Chart</option>
+				<option value="doughnutChart">Doughnut Chart</option>
+				<option value="stackedBarChart"> Stacked Bar Chart</option>
+				<option value="polarAreaChart">Polar Area Chart</option>
+				<option value="multipleLineChart">Multiple Line Chart</option>
 			</select>
 		</div>
-		<div >
-			<label for="xaxis">X axis</label>
-			<select class="form-select form-select-sm h-50" name="xaxis" 
-				formControlName="xaxis" aria-label="Default select example">
-				<option value="years" selected>Years</option>
+		<div>
+			<label for="xaxis">X axis </label>
+			<select class="form-select form-select-sm h-50" name="xaxis" formControlName="xaxis"
+				aria-label="Default select example">
+				<option value="default" selected>Default</option>
+				<option value="years">Years</option>
 				<option value="months">Months</option>
 				<option value="date">Date</option>
 			</select>
 		</div>
-		<div  > 
+		<div *ngIf="this.reactiveForm.value.xaxis === 'date'">
+			<label for="xaxis">Start Date</label>
+			<input class="form-control form-control-sm h-50" formControlName="startDate" type="date" name="name">
+			<label for="xaxis">End Date</label>
+			<input class="form-control form-control-sm h-50" formControlName="endDate" type="date" name="name">
+		</div>
+		<!-- <div *ngIf=" ['pieChart','doughnutChart','polarAreaChart'].includes(this.reactiveForm.value.type)">
+			<label for="yaxis">Y axis </label>
+			<select class="form-select form-select-sm h-50" name="yaxis" formControlName="yaxis"
+				aria-label="Default select example">
+				<option value="default" selected>Default</option>
+				<option value="years">Years</option>
+				<option value="months">Months</option>
+				<option value="date">Date</option>
+			</select>
+		</div> -->
+		<div>
+			<label for="xAxisTitle">X axis label</label>
+			<input class="form-control form-control-sm h-50" formControlName="xAxisTitle" type="text" name="xAxisTitle"
+				id="xAxisTitle" />
+		</div>
+		<div>
+			<label for="yAxisTitle">Y axis label</label>
+			<input class="form-control form-control-sm h-50" formControlName="yAxisTitle" type="text" name="yAxisTitle"
+				id="yAxisTitle" />
+		</div>
+		<div>
 			<label for="chartname">Chart Title</label>
 			<input class="form-control form-control-sm h-50" formControlName="title" type="text" name="chartname"
 				id="chartname" />
 		</div>
-		<div >
+		<div>
 			<label for="chartname">Chart Description</label>
-			<textarea  class="form-control" id="description" name="description"  formControlName="description" rows="4" cols="50"></textarea>
+			<textarea class="form-control" id="description" name="description" formControlName="description" rows="4"
+				cols="50"></textarea>
 		</div>
+
 		<div class="" *ngIf="isObjectEmpty(responseData)">
 			<button type="submit" class="btn btn-primary btn-sm mt-2">Build Chart</button>
 		</div>

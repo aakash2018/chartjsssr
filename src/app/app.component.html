@@ -1,9 +1,9 @@
 <app-header></app-header>
 <div class="container-fluid mx-0 g-0">
 	<div class="row mx-0">
-    <div class="col-2 min-vh-100 bg-danger-subtle position-relative">
-      <app-leftsidebar  (onSubmitChange)="onSubmit($event)" (onUpdateChange)="onUpdate($event)"></app-leftsidebar>
-    </div>
+		<div class="col-2 min-vh-100 bg-danger-subtle position-relative">
+			<app-leftsidebar (onSubmitChange)="onSubmit($event)" (onUpdateChange)="onUpdate($event)"></app-leftsidebar>
+		</div>
 		<div class="col-8 gx-1">
 			<router-outlet></router-outlet>
 		</div>

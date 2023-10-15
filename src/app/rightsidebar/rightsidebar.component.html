@@ -2,8 +2,8 @@
 	<p>Report Builder</p>
 	<ng-container *ngIf="chartData?.length > 0">
 		<div *ngFor="let items of chartData;let i = index">
-			<p  class="cursor-pointer" (click)="reUseable(items,i)">
-				+ {{items.type}}
+			<p class="cursor-pointer" (click)="reUseable(items,i)">
+				+ {{items.type}} ({{items.name}})
 			</p>
 		</div>
 	</ng-container>
@@ -15,7 +15,7 @@
 			<option value="png">Png</option>
 			<option value="xls">Xls</option>
 		</select>
-		<button type="button" class="btn btn-primary btn-sm w-auto p-1 h-50"  (click)="openChartModal()">Build
+		<button type="button" class="btn btn-primary btn-sm w-auto p-1 h-50" (click)="openChartModal()">Build
 			Report</button>
 	</div>
 </div>
@@ -27,11 +27,13 @@
 			<div class="modal-header">
 				<h4 class="modal-title">Preview Pdf</h4>
 			</div>
-			<div class="modal-body bound-box" id="htmlData" #myBounds >
+			<div class="modal-body bound-box" id="htmlData" #myBounds>
 				<ng-container *ngFor="let item of chartData;let i =index">
-					<div class="resizable-widget"   ngResizable  [rzAspectRatio]="aspectRatio" ngDraggable [inBounds]="inBounds" [bounds]="myBounds" rzContainment="parent" rzHandles="all"
-						(mouseup)="newPosition($event)" (rzStop)="onResizeStop($event,item.type)"  (endOffset)="onMoveEnd($event,item.type)" Resizable>
-							<canvas [id]="'chart-container-'+i"></canvas>
+					<div class="resizable-widget" ngResizable [rzAspectRatio]="aspectRatio" ngDraggable
+						[inBounds]="inBounds" [bounds]="myBounds" rzContainment="parent" rzHandles="all"
+						(mouseup)="newPosition($event)" (rzStop)="onResizeStop($event,item.type)"
+						(endOffset)="onMoveEnd($event,item.type)" Resizable>
+						<canvas [id]="'chart-container-'+i"></canvas>
 					</div>
 				</ng-container>
 			</div>

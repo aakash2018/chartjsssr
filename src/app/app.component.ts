@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import * as userData from './../assets/chart.json';
 import { AppserviceService } from './appservice.service';
 @Component({
   selector: 'app-root',
@@ -10,13 +9,8 @@ export class AppComponent implements OnInit {
   title = 'csvchartjs';
   chartData: any[] = [];
   updateData: any[] = [];
-  userData: any;
-  constructor(private appService: AppserviceService) {
-
-  }
-  ngOnInit(): void {
-    this.userData = userData;
-  }
+  constructor(private appService: AppserviceService) { }
+  ngOnInit(): void { }
 
   onSubmit(event: any) {
     const data: any = {
@@ -29,10 +23,7 @@ export class AppComponent implements OnInit {
   }
 
   onUpdate(event: any) {
-    console.log(event, "fdf");
     this.appService.setUpdateChart(event);
-    // this.appService.setChartData(event);
-
   }
 
   reUseable(event: any) {
@@ -41,7 +32,6 @@ export class AppComponent implements OnInit {
       data: event.data,
       options: event.options
     }
-  
-    this.appService.setChartData(event);
+    this.appService.setCharValue(event);
   }
 }
