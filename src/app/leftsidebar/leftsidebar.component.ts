@@ -183,8 +183,6 @@ export class LeftsidebarComponent {
     console.log(this.reactiveForm?.value, 'form');
     if (this.chartData[index].options && this.reactiveForm?.value.type !== 'Table') {
       this.chartData[index].options = this.chartjsData[this.reactiveForm?.value.type].options;
-      console.log(this.chartData[index].options.plugins);
-      
       this.chartData[index].options.plugins.title.text = this.reactiveForm?.value.title;
       this.chartData[index].options.plugins.subtitle.text = this.reactiveForm?.value.description ?? '';
       this.chartData[index].options.scales.x.title.text = this.reactiveForm?.value?.xAxisTitle;
