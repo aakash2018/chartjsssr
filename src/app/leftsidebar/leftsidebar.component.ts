@@ -60,7 +60,9 @@ export class LeftsidebarComponent {
       xAxisTitle: new FormControl('',[
         Validators.required,]),
       yAxisTitle: new FormControl('',[
-        Validators.required,])
+        Validators.required,]),
+      yAxisData: new FormControl(''),
+      yAxisDataMultiSelect: new FormControl('',[Validators.required,]),
     });
 
     console.log(this.reactiveForm?.value, '0-----------');
@@ -81,6 +83,8 @@ export class LeftsidebarComponent {
           yaxis: chartDataValue?.yaxis,
           xAxisTitle: chartDataValue?.xAxisTitle,
           yAxisTitle: chartDataValue?.yAxisTitle,
+          yAxisData: chartDataValue?.yAxisData,
+          yAxisDataMultiSelect: chartDataValue?.yAxisDataMultiSelect,
         });
       } else {
         this.onUpdate();
@@ -117,7 +121,9 @@ export class LeftsidebarComponent {
       options: this.chartjsData[this.reactiveForm?.value?.type]?.options,
       yaxis: this.reactiveForm?.value?.yaxis,
       xAxisTitle: this.reactiveForm?.value?.xAxisTitle,
-      yAxisTitle: this.reactiveForm?.value?.yAxisTitle
+      yAxisTitle: this.reactiveForm?.value?.yAxisTitle,
+      yAxisData: this.reactiveForm?.value?.yAxisData,
+      yAxisDataMultiSelect: this.reactiveForm?.value?.yAxisDataMultiSelect,
     };
     console.log(chartDataset, 'chartDataset');
 
@@ -175,10 +181,12 @@ export class LeftsidebarComponent {
 
     console.log(this.chartData[index].options, 'options');
     console.log(this.reactiveForm?.value, 'form');
-    if (this.chartData[index].options) {
+    if (this.chartData[index].options && this.reactiveForm?.value.type !== 'Table') {
       this.chartData[index].options = this.chartjsData[this.reactiveForm?.value.type].options;
+      console.log(this.chartData[index].options.plugins);
+      
       this.chartData[index].options.plugins.title.text = this.reactiveForm?.value.title;
-      this.chartData[index].options.plugins.subtitle.text = this.reactiveForm?.value.description;
+      this.chartData[index].options.plugins.subtitle.text = this.reactiveForm?.value.description ?? '';
       this.chartData[index].options.scales.x.title.text = this.reactiveForm?.value?.xAxisTitle;
       this.chartData[index].options.scales.y.title.text = this.reactiveForm?.value?.yAxisTitle;
     }
@@ -188,6 +196,8 @@ export class LeftsidebarComponent {
     this.chartData[index].type = this.reactiveForm?.value.type;
     this.chartData[index].xaxis = this.reactiveForm?.value.xaxis;
     this.chartData[index].yaxis = this.reactiveForm?.value.yaxis;
+    this.chartData[index].yAxisData= this.reactiveForm?.value?.yAxisData;
+    this.chartData[index].yAxisDataMultiSelect = this.reactiveForm?.value?.yAxisDataMultiSelect;
 
     this.onUpdateChange.emit(this.chartData);
     this.appService.changeTableViewStatus(this.chartData[index].type === 'Table' ? true : false);

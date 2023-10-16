@@ -22,7 +22,7 @@
 				<option value="multipleLineChart">Multiple Line Chart</option>
 			</select>
 		</div>
-		<div>
+		<div *ngIf="this.reactiveForm.value.type!=='Tabel'">
 			<label for="xaxis">X axis </label>
 			<select class="form-select form-select-sm h-50" name="xaxis" formControlName="xaxis"
 				aria-label="Default select example">
@@ -48,25 +48,40 @@
 				<option value="date">Date</option>
 			</select>
 		</div> -->
-		<div>
+		<div *ngIf="this.reactiveForm.value.type!=='Tabel'">
 			<label for="xAxisTitle">X axis label</label>
 			<input class="form-control form-control-sm h-50" formControlName="xAxisTitle" type="text" name="xAxisTitle"
 				id="xAxisTitle" />
 		</div>
-		<div>
+		<div *ngIf="this.reactiveForm.value.type!=='Tabel'">
 			<label for="yAxisTitle">Y axis label</label>
 			<input class="form-control form-control-sm h-50" formControlName="yAxisTitle" type="text" name="yAxisTitle"
 				id="yAxisTitle" />
 		</div>
-		<div>
-			<label for="chartname">Chart Title</label>
-			<input class="form-control form-control-sm h-50" formControlName="title" type="text" name="chartname"
-				id="chartname" />
+		<div *ngIf="this.reactiveForm.value.type!=='Tabel'">
+			<label for="title">Chart Title</label>
+			<input class="form-control form-control-sm h-50" formControlName="title" type="text" name="title"
+				id="title" />
 		</div>
-		<div>
-			<label for="chartname">Chart Description</label>
+		<div *ngIf="this.reactiveForm.value.type!=='Tabel'">
+			<label for="description">Chart Description</label>
 			<textarea class="form-control" id="description" name="description" formControlName="description" rows="4"
 				cols="50"></textarea>
+		</div>
+
+		<div *ngIf="this.reactiveForm.value.type!=='Tabel'">
+			<label for="yAxisData">Y Axis Data</label>
+			<input class="form-control form-control-sm h-50" type="text" id="yAxisData" name="yAxisData" formControlName="yAxisData">
+		</div>
+
+		<div *ngIf="this.reactiveForm.value.type!=='Tabel'">
+			<label for="yAxisDataMultiSelect">Y Axis Data MultiSelect</label>
+			<select class="form-select form-select-sm h-50" name="yAxisDataMultiSelect" id="yAxisDataMultiSelect" formControlName="yAxisDataMultiSelect">
+				<option value="default" selected>Default</option>
+				<option value="years">Years</option>
+				<option value="months">Months</option>
+				<option value="date">Date</option>
+			</select>
 		</div>
 
 		<div class="" *ngIf="isObjectEmpty(responseData)">

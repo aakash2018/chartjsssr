@@ -1,4 +1,4 @@
-<div class="chart-container" style="position: relative; height:70vh; width:65vw" *ngIf="!previewTable">
+<div class="chart-container" style="position: relative; height:70vh; width:65vw" [ngClass]="{'d-none': previewTable}">
   <canvas id="mychart" #mychart></canvas>
 </div>
 <div class="chart-container" style="position: relative; height:70vh; width:65vw" *ngIf="previewTable">

@@ -54,7 +54,7 @@ export class HomeComponent implements AfterViewInit {
 	}
 
 	ngAfterViewInit(): void {
-		// this.mychart?.destroy()
+		this.mychart?.destroy()
 		if (this.mychart) {
 			this.mychart = new Chart('mychart',
 				{
