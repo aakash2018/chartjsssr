@@ -147,7 +147,13 @@ export class LeftsidebarComponent {
           title: {
             display: true,
             text: this.reactiveForm?.value?.xAxisTitle
-          }
+          },
+          position: 'left',
+        },
+        y1: {
+          display: ['multipleLineChart'].includes(this.reactiveForm.value.type) ? true : false,
+          beginAtZero: true,
+          position: 'right',
         },
         x: {
           display: ['pieChart','doughnutChart','polarAreaChart'].includes(this.reactiveForm.value.type) ? false : true,
