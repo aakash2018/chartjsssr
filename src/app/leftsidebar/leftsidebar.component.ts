@@ -152,6 +152,7 @@ export class LeftsidebarComponent {
         },
         y1: {
           display: ['multipleLineChart'].includes(this.reactiveForm.value.type) ? true : false,
+          stacked: this.reactiveForm.value.type === 'stackedBarChart' ? true : false,
           beginAtZero: true,
           position: 'right',
         },
