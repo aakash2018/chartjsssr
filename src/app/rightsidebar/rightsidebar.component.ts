@@ -18,7 +18,10 @@ export class RightsidebarComponent implements OnInit {
   @Input() updateData: any;
   @ViewChildren('myBounds') boundElements!: QueryList<ElementRef>;
   @Output() onReusableChange = new EventEmitter();
-  userData: any;
+
+  @Output() onUpdateChange = new EventEmitter();
+
+
   aspectRatio: any;
   displayStyle = "none";
   inBounds = true;
@@ -32,10 +35,8 @@ export class RightsidebarComponent implements OnInit {
   mychart: any;
 
   constructor(private appService: AppserviceService) {
-
   }
   ngOnInit(): void {
-    this.userData = this.chartData;
   }
 
   openChartModal() {
@@ -122,6 +123,13 @@ export class RightsidebarComponent implements OnInit {
     localStorage.setItem('chartIndex', index);
     this.appService.changeTableViewStatus(value.type === 'Table' ? true : false);
     this.onReusableChange.emit(value);
+  }
+
+
+  deleteChart(index:number) {
+    const chartData : any = this.appService.chartDataArr()
+    chartData.splice(index,1)
+    this.onUpdateChange.emit(chartData)
   }
 
 }3

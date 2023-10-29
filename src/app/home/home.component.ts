@@ -66,6 +66,7 @@ export class HomeComponent implements AfterViewInit {
 	}
 
 	updateChart(updateValue: any): void {
+		this.mychart?.destroy();
 		this.mychart = new Chart('mychart',
 			{
 				data: this?.data,

@@ -8,7 +8,7 @@
 			<router-outlet></router-outlet>
 		</div>
 		<div class="col-2 min-vh-100 bg-danger-subtle ">
-			<app-rightsidebar [chartData]="chartData" (onReusableChange)="reUseable($event)"></app-rightsidebar>
+			<app-rightsidebar [chartData]="chartData" (onUpdateChange)="onUpdate($event)" (onReusableChange)="reUseable($event)"></app-rightsidebar>
 		</div>
 
 	</div>
