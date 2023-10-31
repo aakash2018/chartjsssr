@@ -21,7 +21,16 @@
 					],
 					"backgroundColor": "rgba(75, 192, 192, 0.2)",
 					"borderColor": "rgba(75, 192, 192, 1)",
-					"borderWidth": 2
+					"borderWidth": 2,
+					"datalabels": {
+						"align": "end",
+						"anchor": "end",
+						"labels": {
+						  "value": {
+							"color": "rgba(75, 192, 192)"
+						  }
+						}
+					}
 				},
 				{
 					"label": "Data 3 (Left)",
@@ -35,7 +44,16 @@
 					],
 					"backgroundColor": "rgba(99, 52, 192, 0.2)",
 					"borderColor": "rgba(99, 52, 192, 1)",
-					"borderWidth": 2
+					"borderWidth": 2,
+					"datalabels": {
+						"align": "end",
+						"anchor": "end",
+						"labels": {
+						  "value": {
+							"color": "rgba(99, 52, 192)"
+						  }
+						}
+					}
 				},
 				{
 					"label": "Data 2 (Right)",
@@ -49,7 +67,16 @@
 					],
 					"backgroundColor": "rgba(255, 99, 132, 0.2)",
 					"borderColor": "rgba(255, 99, 132, 1)",
-					"borderWidth": 2
+					"borderWidth": 2,
+					"datalabels": {
+						"align": "end",
+						"anchor": "end",
+						"labels": {
+						  "value": {
+							"color": "rgba(255, 99, 132)"
+						  }
+						}
+					}
 				},
 				{
 					"label": "Data 4 (Right)",
@@ -63,7 +90,16 @@
 					],
 					"backgroundColor": "rgba(45,45, 192, 0.2)",
 					"borderColor": "rgba(45, 45, 192, 1)",
-					"borderWidth": 2
+					"borderWidth": 2,
+					"datalabels": {
+						"align": "end",
+						"anchor": "end",
+						"labels": {
+						  "value": {
+							"color": "rgba(45, 45, 192)"
+						  }
+						}
+					}
 				}
 			]
 		},
@@ -91,6 +127,11 @@
 				"title": {
 					"display": true,
 					"text": "Waterfall Chart Example"
+				},
+				"datalabels": {
+					"font": {
+					  "weight": "bold"
+					}
 				}
 			}
 		}
@@ -117,7 +158,19 @@
 					],
 					"backgroundColor": "rgba(75, 192, 192, 0.2)",
 					"borderColor": "rgba(75, 192, 192, 1)",
-					"borderWidth": 2
+					"borderWidth": 2,
+					"datalabels": {
+						"align": "end",
+						"anchor": "end",
+						"labels": {
+						  "value": {
+							"color": "rgba(75, 192, 192)"
+						  }
+						},
+						"font": {
+							"weight": "bold"
+						}
+					}
 				},
 				{
 					"label": "Data 3 (Left)",
@@ -131,7 +184,19 @@
 					],
 					"backgroundColor": "rgba(45,45, 192, 0.2)",
 					"borderColor": "rgba(45,45, 192, 1)",
-					"borderWidth": 2
+					"borderWidth": 2,
+					"datalabels": {
+						"align": "end",
+						"anchor": "end",
+						"labels": {
+						  "value": {
+							"color": "rgba(45, 45, 192)"
+						  }
+						},
+						"font": {
+							"weight": "bold"
+						}
+					}
 				}
 			]
 		}

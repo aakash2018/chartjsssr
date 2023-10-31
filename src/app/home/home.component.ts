@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { Chart, registerables } from 'chart.js';
 import { AppserviceService } from '../appservice.service';
 import * as chartData from './../../assets/chart.json';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+
 Chart.register(...registerables);
 
 @Component({
@@ -59,7 +61,8 @@ export class HomeComponent implements AfterViewInit {
 			this.mychart = new Chart('mychart',
 				{
 					data: this?.data,
-					options: this?.options
+					options: this?.options,
+					plugins: [ChartDataLabels]
 				}
 			)
 		}
@@ -70,7 +73,8 @@ export class HomeComponent implements AfterViewInit {
 		this.mychart = new Chart('mychart',
 			{
 				data: this?.data,
-				options: this?.options
+				options: this?.options,
+				plugins: [ChartDataLabels]
 			}
 		)
 		if (this.mychart) {
