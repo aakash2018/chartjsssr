@@ -5,6 +5,7 @@ import html2canvas from 'html2canvas';
 import { AngularDraggableModule } from 'angular2-draggable';
 import { Chart, registerables } from 'chart.js';
 import { AppserviceService } from '../appservice.service';
+import ChartDataLabels from 'chartjs-plugin-datalabels';
 Chart.register(...registerables);
 @Component({
   selector: 'app-rightsidebar',
@@ -46,7 +47,8 @@ export class RightsidebarComponent implements OnInit {
       this.mychart = new Chart(`chart-container-${index}`,
         {
           data: element.data,
-          options: element.options
+          options: element.options,
+          plugins: [ChartDataLabels]
         }
       )
     });

@@ -223,7 +223,19 @@
 					],
 					"backgroundColor": "rgba(75, 192, 192, 0.2)",
 					"borderColor": "rgba(75, 192, 192, 1)",
-					"borderWidth": 2
+					"borderWidth": 2,
+					"datalabels": {
+						"align": "end",
+						"anchor": "end",
+						"labels": {
+						  "value": {
+							"color": "rgba(75, 192, 192)"
+						  }
+						},
+						"font": {
+							"weight": "bold"
+						}
+					}
 				},
 				{
 					"label": "Data 3 (Left)",
@@ -237,7 +249,19 @@
 					],
 					"backgroundColor": "rgba(45,45, 192, 0.2)",
 					"borderColor": "rgba(45,45, 192, 1)",
-					"borderWidth": 2
+					"borderWidth": 2,
+					"datalabels": {
+						"align": "end",
+						"anchor": "end",
+						"labels": {
+						  "value": {
+							"color": "rgba(45,45, 192)"
+						  }
+						},
+						"font": {
+							"weight": "bold"
+						}
+					}
 				}
 			]
 		}
@@ -332,7 +356,26 @@
 						"rgba(153, 102, 255, 1)",
 						"rgba(255, 159, 64, 1)"
 					],
-					"borderWidth": 2
+					"borderWidth": 2,
+					"datalabels": {
+						"align": "end",
+						"anchor": "end",
+						"labels": {
+						  "value": {
+							"color": [
+							"rgba(255, 99, 132, 1)",
+							"rgba(54, 162, 235, 1)",
+							"rgba(255, 206, 86, 1)",
+							"rgba(75, 192, 192, 1)",
+							"rgba(153, 102, 255, 1)",
+							"rgba(255, 159, 64, 1)"
+							]
+						  }
+						},
+						"font": {
+							"weight": "bold"
+						}
+					}
 				}
 			]
 		}
@@ -352,7 +395,19 @@
 				"data": [11,32,15,19,45],
 				"backgroundColor": "rgba(45,45, 192, 0.2)",
 				"borderColor": "rgba(45,45, 192, 1)",
-				"fill": true
+				"fill": true,
+				"datalabels": {
+					"align": "end",
+					"anchor": "end",
+					"labels": {
+					  "value": {
+						"color": "rgba(45,45, 192)"
+					  }
+					},
+					"font": {
+						"weight": "bold"
+					}
+				}
 			  },
 			  {
 				"type": "line",
@@ -360,7 +415,19 @@
 				"data": [10, 15, 13, 18, 12],
 				"borderColor": "rgba(255, 99, 132, 0.6)",
 				"backgroundColor": "rgba(255, 99, 132, 0.6)",
-				"fill": true
+				"fill": true,
+				"datalabels": {
+					"align": "end",
+					"anchor": "end",
+					"labels": {
+					  "value": {
+						"color": "rgba(255, 99, 132)"
+					  }
+					},
+					"font": {
+						"weight": "bold"
+					}
+				}
 			  }
 			]
 		  }
@@ -387,7 +454,19 @@
 				"backgroundColor": "rgba(255, 99, 132, 0.6)",
 				"pointBackgroundColor": "rgba(75, 192, 192, 1)",
 				"pointerRadius": 5,
-				"pointHoverRadius": 8
+				"pointHoverRadius": 8,
+				"datalabels": {
+					"align": "end",
+					"anchor": "end",
+					"labels": {
+					  "value": {
+						"color": "rgba(75, 192, 192)"
+					  }
+					},
+					"font": {
+						"weight": "bold"
+					}
+				}
 			}]
 		}
 	},
@@ -410,7 +489,26 @@
 				"rgba(153, 102, 255, 1)",
 				"rgba(255, 159, 64, 1)"
 			  ],
-			  "hoverOffset": 4
+			  "hoverOffset": 4,
+			  "datalabels": {
+				"align": "end",
+				"anchor": "end",
+				"labels": {
+				  "value": {
+					"color": [
+						"rgba(255, 99, 132, 1)",
+						"rgba(54, 162, 235, 1)",
+						"rgba(255, 206, 86, 1)",
+						"rgba(75, 192, 192, 1)",
+						"rgba(153, 102, 255, 1)",
+						"rgba(255, 159, 64, 1)"
+					  ]
+				  }
+				},
+				"font": {
+					"weight": "bold"
+				}
+			}
 			}]
 		  }
 	},
@@ -422,31 +520,91 @@
                     "label": "Dataset 1",
                     "data": [10, 20, 15, 25, 30],
 					"type": "bar",
-                    "backgroundColor": "rgba(255, 99, 132, 0.6)"
+                    "backgroundColor": "rgba(255, 99, 132, 0.6)",
+					"datalabels": {
+						"align": "center",
+						"anchor": "center",
+						"labels": {
+						  "value": {
+							"color": "rgba(255, 99, 132)"
+						  }
+						},
+						"font": {
+							"weight": "bold"
+						}
+					}
                 },
                 {
                     "label": "Dataset 2",
                     "data": [5, 15, 10, 20, 25],
 					"type": "bar",
-                    "backgroundColor": "rgba(54, 162, 235, 0.6)"
+                    "backgroundColor": "rgba(54, 162, 235, 0.6)",
+					"datalabels": {
+						"align": "center",
+						"anchor": "center",
+						"labels": {
+						  "value": {
+							"color": "rgba(54, 162, 235)"
+						  }
+						},
+						"font": {
+							"weight": "bold"
+						}
+					}
                 },
                 {
                     "label": "Dataset 3",
                     "data": [10, 5, 20, 10, 15],
 					"type": "bar",
-                    "backgroundColor": "rgba(255, 206, 86, 0.6)"
+                    "backgroundColor": "rgba(255, 206, 86, 0.6)",
+					"datalabels": {
+						"align": "center",
+						"anchor": "center",
+						"labels": {
+						  "value": {
+							"color": "rgba(255, 206, 86)"
+						  }
+						},
+						"font": {
+							"weight": "bold"
+						}
+					}
                 },
                 {
                     "label": "Dataset 4",
                     "data": [5, 10, 5, 10, 20],
 					"type": "bar",
-                    "backgroundColor": "rgba(75, 192, 192, 0.6)"
+                    "backgroundColor": "rgba(75, 192, 192, 0.6)",
+					"datalabels": {
+						"align": "center",
+						"anchor": "center",
+						"labels": {
+						  "value": {
+							"color": "rgba(75, 192, 192)"
+						  }
+						},
+						"font": {
+							"weight": "bold"
+						}
+					}
                 },
                 {
                     "label": "Dataset 5",
                     "data": [15, 10, 15, 15, 10],
 					"type": "bar",
-                    "backgroundColor": "rgba(153, 102, 255, 0.6)"
+                    "backgroundColor": "rgba(153, 102, 255, 0.6)",
+					"datalabels": {
+						"align": "center",
+						"anchor": "center",
+						"labels": {
+						  "value": {
+							"color": "rgba(153, 102, 255)"
+						  }
+						},
+						"font": {
+							"weight": "bold"
+						}
+					}
                 }
 			]
 		  }
@@ -473,7 +631,25 @@
 				],
 				"borderWidth": 2,
 				"borderColor": "white",
-				"hoverBackgroundColor": "rgba(0, 0, 0, 0.8)"
+				"hoverBackgroundColor": "rgba(0, 0, 0, 0.8)",
+				"datalabels": {
+					"align": "end",
+					"anchor": "end",
+					"labels": {
+					  "value": {
+						"color": [
+							"rgba(255, 99, 132)",
+							"rgba(54, 162, 235)",
+							"rgba(255, 206, 86)",
+							"rgba(75, 192, 192)",
+							"rgba(153, 102, 255)"
+						]
+					  }
+					},
+					"font": {
+						"weight": "bold"
+					}
+				}
 			}]
 		}
 	},
@@ -487,7 +663,19 @@
 					"data": [10, 15, 13, 18, 12],
 					"backgroundColor": "rgba(75, 192, 192, 0.6)",
 					"borderColor": "rgba(75, 192, 192, 1)",
-					"yAxisID": "y"
+					"yAxisID": "y",
+					"datalabels": {
+						"align": "end",
+						"anchor": "end",
+						"labels": {
+						  "value": {
+							"color": "rgba(75, 192, 192)"
+						  }
+						},
+						"font": {
+							"weight": "bold"
+						}
+					}
 				},
 				{
 					"label": "Dataset 2",
@@ -495,7 +683,19 @@
 					"data": [5, 15, 10, 20, 25],
 					"backgroundColor": "rgba(54, 162, 235, 0.6)",
 					"borderColor": "rgba(54, 162, 235, 1)",
-					"yAxisID": "y"
+					"yAxisID": "y",
+					"datalabels": {
+						"align": "end",
+						"anchor": "end",
+						"labels": {
+						  "value": {
+							"color": "rgba(54, 162, 235)"
+						  }
+						},
+						"font": {
+							"weight": "bold"
+						}
+					}
 				},
 				{
 					"label": "Dataset 3",
@@ -503,7 +703,19 @@
 					"data": [20, 25, 30, 15, 10],
 					"backgroundColor": "rgba(255, 99, 132, 0.6)",
 					"borderColor": "rgba(255, 99, 132, 1)",
-					"yAxisID": "y1"
+					"yAxisID": "y1",
+					"datalabels": {
+						"align": "end",
+						"anchor": "end",
+						"labels": {
+						  "value": {
+							"color": "rgba(255, 99, 132)"
+						  }
+						},
+						"font": {
+							"weight": "bold"
+						}
+					}
 				},
 				{
 					"label": "Dataset 4",
@@ -511,7 +723,19 @@
 					"data": [12, 18, 10, 15, 20],
 					"backgroundColor": "rgba(153, 102, 255, 0.6)",
 					"borderColor": "rgba(153, 102, 255, 1)",
-					"yAxisID": "y1"
+					"yAxisID": "y1",
+					"datalabels": {
+						"align": "end",
+						"anchor": "end",
+						"labels": {
+						  "value": {
+							"color": "rgba(153, 102, 255)"
+						  }
+						},
+						"font": {
+							"weight": "bold"
+						}
+					}
 				},
 				{
 					"label": "Dataset 5",
@@ -519,7 +743,19 @@
 					"data": [30, 20, 10, 25, 15],
 					"backgroundColor": "rgba(255, 206, 86, 0.6)",
 					"borderColor": "rgba(255, 206, 86, 1)",
-					"yAxisID": "y"
+					"yAxisID": "y",
+					"datalabels": {
+						"align": "end",
+						"anchor": "end",
+						"labels": {
+						  "value": {
+							"color": "rgba(255, 206, 86)"
+						  }
+						},
+						"font": {
+							"weight": "bold"
+						}
+					}
 				}
 			]
 		}
