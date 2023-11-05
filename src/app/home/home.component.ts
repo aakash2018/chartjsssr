@@ -4,8 +4,10 @@ import { Chart, registerables } from 'chart.js';
 import { AppserviceService } from '../appservice.service';
 import * as chartData from './../../assets/chart.json';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
+import zoomPlugin from 'chartjs-plugin-zoom';
 
 Chart.register(...registerables);
+Chart.register(zoomPlugin);
 
 @Component({
 	selector: 'app-home',

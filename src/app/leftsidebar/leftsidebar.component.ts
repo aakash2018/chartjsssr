@@ -176,6 +176,35 @@ export class LeftsidebarComponent {
         subtitle: {
           display: true,
           text: this.reactiveForm.value.description
+        },
+        pan: {
+          enabled: true,
+          mode: "xy"
+        },
+        drag: {
+          enabled: true,
+          modifierKey: "shift"
+        },
+        overview: {
+          enabled: true,
+          scaleX: 0.2
+        },
+        limits: {
+          xMin: 0.5,
+          xMax: 2,
+          yMin: 0.5,
+          yMax: 2
+        },
+        zoom: {
+          zoom: {
+            wheel: {
+              enabled: true
+            },
+            pinch: {
+              enabled: true
+            },
+            mode: "xy"
+          }
         }
       }
     }
