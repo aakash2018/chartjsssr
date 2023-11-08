@@ -132,6 +132,7 @@ export class RightsidebarComponent implements OnInit {
     const chartData : any = this.appService.chartDataArr()
     chartData.splice(index,1)
     this.onUpdateChange.emit(chartData)
+    this.appService.deleteChart.set(true)
   }
 
 }3

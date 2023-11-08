@@ -6,6 +6,7 @@ import { Injectable, signal } from '@angular/core';
 export class AppserviceService {
   chartDataArr = signal({})
   chartDataValue = signal({})
+  deleteChart = signal(false)
 
   previewTable = signal(false)
 

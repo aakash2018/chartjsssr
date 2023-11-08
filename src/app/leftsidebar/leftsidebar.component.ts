@@ -89,6 +89,10 @@ export class LeftsidebarComponent {
       } else {
         this.onUpdate();
       }
+
+      if(this.appService.deleteChart()) {
+        this.reactiveForm.reset()
+      }
     });
   }
 
