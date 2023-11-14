@@ -27,8 +27,84 @@ export class HomeComponent implements AfterViewInit {
 	previewTable!:boolean
 	tempIndex!:number
 	constructor(private appService: AppserviceService) {
-		this.data = this.chartdata['CombineChart']?.data;
-		this.options = this.chartdata['CombineChart']?.options;
+		this.data = this.chartdata['WaterFallChart']?.data;
+		this.options = {
+			scales: {
+				y1:
+				{
+					beginAtZero: true,
+					ticks: {
+						callback: function (label: any) {
+							if (label > 999 || label < -999) {
+								return `$${(label / 1000)}k`;
+							} else {
+								return `$${label}`
+							}
+						},
+					},
+					title: {
+						display: true,
+					},
+					position: 'left',
+				},
+				y: {
+					display: false,
+				}
+			},
+			plugins: {
+				legend: {
+					display: false
+				},
+				title: {
+					display: true,
+					text: 'Water Fall Chart'
+				},
+				datalabels: {
+					align: 'end',
+					anchor: 'end',
+					font: {
+						weight: 'bold'
+					},
+					clamp: true,
+					formatter: (val: any) => {
+						return `$ ${val[1]}`
+					},
+				},
+				subtitle: {
+					display: true,
+					text: 'Water Fall Chart'
+				  },
+				  pan: {
+					enabled: true,
+					mode: "xy"
+				  },
+				  drag: {
+					enabled: true,
+					modifierKey: "shift"
+				  },
+				  overview: {
+					enabled: true,
+					scaleX: 0.2
+				  },
+				  limits: {
+					xMin: 0.5,
+					xMax: 2,
+					yMin: 0.5,
+					yMax: 2
+				  },
+				  zoom: {
+					zoom: {
+					  wheel: {
+						enabled: true
+					  },
+					  pinch: {
+						enabled: true
+					  },
+					  mode: "xy"
+					}
+				  }
+			}
+		}
 
 		effect(() => {
 			this.chartdata = this.appService.chartDataArr();
